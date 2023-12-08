@@ -1,0 +1,141 @@
+<section class="hubxpert_filtered_portfolio_container">
+
+<!--   Portfolio Gallery Title -->
+  
+<div class="hubxpert_filtered_portfolio_header">
+    
+     {{ module.portfolio_gallery_title }}
+
+  </div>
+
+<!--   Portfolio Gallery Menu -->
+  
+<div>
+    <ul>
+    {% for item in module.portfolio %}
+      <li class="hubxpert_filtered_portfolio_list" data-filter="{{item.portfolio_menu_name }}">{{ item.portfolio_menu_name }}</li>
+    {% endfor %}
+  </ul>
+</div>
+  
+<!--   Portfolio Gallery Projects Items -->
+  
+<div class="hubxpert_filtered_portfolio_items">
+   {% for item in module.portfolio %}
+    {% for item2 in item.portfolio_information %}
+    <div class="hubxpert_filtered_portfolio_itembox" data-item="{{item.portfolio_menu_name }}">
+      <a href="{{ item2.portfolio_url }}" target="_blank">
+      <img src="{{ item2.portfolio_image.src }}" alt="{{ item2.portfolio_image.alt }}" />
+      
+       <div class="hubxpert_filtered_portfolio_content">
+            <h2>
+             {{item2.portfolio_title.portfolio_title}}
+            </h2>
+            <p>
+              {{ item2.portfolio_title.portfolio_subtitle}}
+            </p>
+        </div>
+        </a>
+    </div>
+    {% endfor %}
+  {% endfor %}
+  </div>
+</section>
+
+
+
+<!-- Portfolio Gallery CSS -->
+
+{% require_css %}
+<style>
+  
+/*   Module Background Color */
+  
+  .hubxpert_filtered_portfolio_container {
+  background-color:  {{ module.style.module_background.module_background.color }};  
+  opacity: {{'0.'+bg if module.style.module_background.module_background.opacity < 100 else '1'}};
+  opacity: {{module.style.module_background.module_background.opacity / 100}}
+}
+  
+/*   Portfolio Header Title */
+
+  .hubxpert_filtered_portfolio_header{
+  text-align: center;
+  padding: 20px;  
+  font-family: {{ module.style.portfolio_gallery_title_font.portfolio_gallery_title_font.font }};
+  {{ module.style.portfolio_gallery_title_font.portfolio_gallery_title_font.style }}; 
+  color: {{ module.style.portfolio_gallery_title_font.portfolio_gallery_title_font.color }}; 
+  font-size: {{ module.style.portfolio_gallery_title_font.portfolio_gallery_title_font.size }}px;
+}
+ 
+
+  
+ 
+  .hubxpert_filtered_portfolio_container ul li {
+   
+  background-color:  {{ module.style.menu.menu_background_color.color }};
+  opacity: {{'0.'+bg if module.style.menu.menu_background_color.opacity < 100 else '1'}};
+  opacity: {{module.style.menu.menu_background_color.opacity / 100}};
+      
+   font-family: {{ module.style.menu.menu_font.font }}; 
+               {{ module.style.menu.menu_font.style }};
+  color: {{ module.style.menu.menu_font.color }};
+  font-size: {{ module.style.menu.menu_font.size }}px;
+  border-radius: {{ module.style.menu.menu_border_radius }}px;
+      
+}
+  
+  
+   .hubxpert_filtered_portfolio_container ul .hubxpert_filtered_portfolio_active {
+    background-color: {{ module.style.menu.selected_menu_background_color.color }};
+    opacity: {{'0.'+bg if module.style.menu.selected_menu_background_color.opacity < 100 else '1'}};
+    opacity: {{module.style.menu.selected_menu_background_color.opacity / 100}};
+    color: {{ module.style.menu.selected_menu_text_color.color }};
+      
+}
+  
+  /*   Project Items */
+   .hubxpert_filtered_portfolio_items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: {{ module.style.image.gap_between_portfolio_image }}px;
+     
+}
+  
+  .hubxpert_filtered_portfolio_items .hubxpert_filtered_portfolio_itembox {
+    
+    width: {{ module.style.image.portfolio_image_width }}px;
+    height: {{ module.style.image.portfolio_image_height}}px;
+     
+}
+  
+
+  
+  .hubxpert_filtered_portfolio_items .hubxpert_filtered_portfolio_itembox img, .hubxpert_filtered_portfolio_content {
+     border-radius: {{ module.style.image.portfolio_image_border_radius }}px; 
+  }
+  
+  /*   Project Title*/
+  
+  .hubxpert_filtered_portfolio_content h2 {    
+  font-family: {{ module.style.title_subtitle.portfolio_title_font.font }};
+               {{ module.style.title_subtitle.portfolio_title_font.style }};
+  color: {{ module.style.title_subtitle.portfolio_title_font.color }};
+  font-size: {{ module.style.title_subtitle.portfolio_title_font.size }}px;
+}
+  
+
+/*   Project Subtitle  */
+  .hubxpert_filtered_portfolio_content p {
+    font-family: {{ module.style.title_subtitle.portfolio_subtitle_font.font }}; 
+                {{ module.style.title_subtitle.portfolio_subtitle_font.style }}; 
+  color: {{ module.style.title_subtitle.portfolio_subtitle_font.color }}; 
+  font-size: {{ module.style.title_subtitle.portfolio_subtitle_font.size }}px;
+ }
+  
+  
+</style>
+
+{% end_require_css %}
